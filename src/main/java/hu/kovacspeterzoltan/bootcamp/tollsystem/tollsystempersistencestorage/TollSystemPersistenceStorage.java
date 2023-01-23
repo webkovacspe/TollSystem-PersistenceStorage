@@ -25,9 +25,9 @@ public class TollSystemPersistenceStorage implements MotorwayVignetteStorageInte
         mv.setVehicleCategory("d1");
         mv.setMotorwayVignetteType("yearly");
         mv.setPrice(10000);
-        mv.setValidFrom(new Date("2021.01.01 0:00"));
-        mv.setValidTo(new Date("2022.01.31 23:59"));
-        mv.setDateOfPurchase(new Date("2021.01.10 10:25"));
+        mv.setValidFrom(new Date(2021, 1, 1));
+        mv.setValidTo(new Date(2022, 01, 31, 23, 59, 59));
+        mv.setDateOfPurchase(new Date(2021, 1, 10, 10, 25, 38));
         return mv;
     }
 
@@ -37,9 +37,9 @@ public class TollSystemPersistenceStorage implements MotorwayVignetteStorageInte
         mv.setVehicleCategory("d1");
         mv.setMotorwayVignetteType("yearly");
         mv.setPrice(15000);
-        mv.setValidFrom(new Date("2023.01.01 0:00"));
-        mv.setValidTo(new Date("2024.01.31 23:59"));
-        mv.setDateOfPurchase(new Date("2023.01.12 15:30"));
+        mv.setValidFrom(new Date(2023, 1, 1));
+        mv.setValidTo(new Date(2024, 01, 31, 23, 59, 59));
+        mv.setDateOfPurchase(new Date(2023, 1, 12, 15, 30, 52));
         return mv;
     }
 }
