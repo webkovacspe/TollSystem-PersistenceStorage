@@ -1,5 +1,7 @@
 package hu.kovacspeterzoltan.bootcamp.tollsystem.tollsystempersistencestorage;
 
+import hu.kovacspeterzoltan.bootcamp.tollsystem.tollsystempersistencestorage.csvmanager.CSVManager;
+import hu.kovacspeterzoltan.bootcamp.tollsystem.tollsystempersistencestorage.parser.StorageParser;
 import hu.kovacspeterzoltan.bootcamp.tollsystemapp.entity.MotorwayVignetteEntity;
 import hu.kovacspeterzoltan.bootcamp.tollsystemapp.storage.MotorwayVignetteStorageInterface;
 
@@ -8,16 +10,29 @@ import java.util.Date;
 import java.util.List;
 
 public class TollSystemPersistenceStorage implements MotorwayVignetteStorageInterface {
+    private List<MotorwayVignetteEntity> motorwayVignetteEntities;
+    private final StorageParser parser;
+    private final CSVManager csvManager;
+
+    public TollSystemPersistenceStorage() {
+        parser = new StorageParser();
+        csvManager = new CSVManager("./motorwayVignetteStorage.csv");
+        csvManager.createFileIfNotExists();
+    }
+
     @Override
     public List<MotorwayVignetteEntity> findByRegistrationNumber(String registrationNumber) {
         List<MotorwayVignetteEntity> motorwayVignettes = new ArrayList<>();
-        if ("AA:BB-123".equals(registrationNumber.toUpperCase())) {
-            MotorwayVignetteEntity lastMV = getLastMotorwayVignetteEntity();
-            MotorwayVignetteEntity currentMV = getCurrentMotorwayVignetteEntity();
-            motorwayVignettes.add(lastMV);
-            motorwayVignettes.add(currentMV);
-        }
+        loadCSV();
+        motorwayVignetteEntities.forEach(entity -> {
+            motorwayVignettes.add(entity);
+        });
         return motorwayVignettes;
+    }
+
+    private void loadCSV() {
+        List<String[]> csv = csvManager.load();
+        motorwayVignetteEntities = parser.csvToMotorwayVignettes(csv);
     }
 
     private MotorwayVignetteEntity getLastMotorwayVignetteEntity() {
