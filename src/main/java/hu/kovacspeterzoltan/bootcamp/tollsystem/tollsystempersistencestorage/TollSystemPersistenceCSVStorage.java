@@ -1,6 +1,6 @@
 package hu.kovacspeterzoltan.bootcamp.tollsystem.tollsystempersistencestorage;
 
-import hu.kovacspeterzoltan.bootcamp.tollsystem.tollsystempersistencestorage.csvmanager.CSVManager;
+import hu.kovacspeterzoltan.bootcamp.tollsystem.tollsystempersistencestorage.storage.CSVStorageManager;
 import hu.kovacspeterzoltan.bootcamp.tollsystem.tollsystempersistencestorage.parser.StorageParser;
 import hu.kovacspeterzoltan.bootcamp.tollsystemapp.entity.MotorwayVignetteEntity;
 import hu.kovacspeterzoltan.bootcamp.tollsystemapp.storage.MotorwayVignetteStorageInterface;
@@ -9,15 +9,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class TollSystemPersistenceStorage implements MotorwayVignetteStorageInterface {
+public class TollSystemPersistenceCSVStorage implements MotorwayVignetteStorageInterface {
     private List<MotorwayVignetteEntity> motorwayVignetteEntities;
     private final StorageParser parser;
-    private final CSVManager csvManager;
+    private final CSVStorageManager csvManager;
 
-    public TollSystemPersistenceStorage() {
+    public TollSystemPersistenceCSVStorage() {
         parser = new StorageParser();
-        csvManager = new CSVManager("./motorwayVignetteStorage.csv");
-        csvManager.createFileIfNotExists();
+        csvManager = new CSVStorageManager("./motorwayVignetteStorage.csv");
     }
 
     @Override

@@ -1,12 +1,17 @@
-package hu.kovacspeterzoltan.bootcamp.tollsystem.tollsystempersistencestorage.csvmanager;
+package hu.kovacspeterzoltan.bootcamp.tollsystem.tollsystempersistencestorage.storage;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CSVManager {
+public class CSVStorageManager {
     public static final String DELIMITER = ",";
     String fileName;
+
+    public CSVStorageManager(String fileName) {
+        this.fileName = fileName;
+        createFileIfNotExists();
+    }
 
     public void createFileIfNotExists() {
         try {
@@ -20,10 +25,6 @@ public class CSVManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public CSVManager(String fileName) {
-        this.fileName = fileName;
     }
 
     public List<String[]> load() {
