@@ -81,9 +81,8 @@ public class SQLiteStorageManager {
 
     private void connectToDatabase() {
         try {
-            Class.forName("org.sqlite.JDBC");
             connection = DriverManager.getConnection("jdbc:sqlite:motorwayvignette.db");
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
